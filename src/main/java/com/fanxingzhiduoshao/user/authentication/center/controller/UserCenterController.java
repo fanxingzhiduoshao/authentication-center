@@ -3,6 +3,7 @@ package com.fanxingzhiduoshao.user.authentication.center.controller;
 
 import com.fanxingzhiduoshao.user.authentication.center.controller.service.UserService;
 import com.fanxingzhiduoshao.user.authentication.center.controller.vo.AjaxResult;
+import com.fanxingzhiduoshao.user.authentication.center.controller.vo.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,8 @@ public class UserCenterController {
 
     @PostMapping(name = "", produces = "application/json;charset=utf-8")
     @ResponseBody
-    public AjaxResult addUser() {
-        userService.addUser();
+    public AjaxResult addUser(@RequestBody UserVO userVO) {
+        userService.addUser(userVO);
         return AjaxResult.SUCCESSS;
     }
 
