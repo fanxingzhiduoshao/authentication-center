@@ -1,19 +1,14 @@
-package com.fanxingzhiduoshao.user.authentication.center.controller.entity;
+package com.fanxingzhiduoshao.user.authentication.center.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Getter
-@Setter
-@ToString
+@Getter @Setter @ToString
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -24,5 +19,10 @@ public class User {
     private String mail;
     private Date createTime;
     private Date updateTime;
+    private Boolean mailState;
+    private Boolean phoneState;
+    private Boolean state;
+    private String encryptKey;
+
 
 }
