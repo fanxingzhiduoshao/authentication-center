@@ -11,6 +11,7 @@ public class Code {
     public static final Code WRONG_ACCOUNT_NAME_EXIST = new Code(500,"该用户名已存在!");
     public static final Code WRONG_PHONENUMBER_EXIST = new Code(500,"该电话号已被使用");
     public static final Code WRONG_MAIL_EXIST = new Code(500,"该邮箱已使用");
+    public static final Code WRONG_NAME_PASSWORD_MISMATCH  = new Code(500,"账户名与密码不匹配");
 
     @NonNull
     private int code;
