@@ -46,17 +46,15 @@ public class RegisterController {
 
 
     public AjaxResult addUserByMail() {
-
         return AjaxResult.SUCCESSS;
     }
 
     public AjaxResult addUserByPhone() {
-
         return AjaxResult.SUCCESSS;
     }
 
 
-    @PostMapping(value = "/validate_code")
+    @GetMapping(value = "/validate_code")
     @ApiOperation("获取验证码")
     public void getVarificationCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ValidateCode validateCode = ValidateCodeUtil.instance();
@@ -81,7 +79,7 @@ public class RegisterController {
         return;
     }
 
-    @GetMapping(value = "/validate_code", produces = "application/json;charset=utf-8")
+    @PostMapping(value = "/validate_code", produces = "application/json;charset=utf-8")
     @ResponseBody
     public AjaxResult checkValidateCode(HttpServletRequest request,
                                         @RequestParam(required = false, defaultValue = "") String code) {
