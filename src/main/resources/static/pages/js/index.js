@@ -176,7 +176,7 @@ function getXhr() {
 
 function get_code() {
 	var xhr = getXhr();
-	xhr.open('get', 'http://localhost:8080/user/register/validate_code');
+	xhr.open('get', '../register/validate_code');
 	xhr.send();
 	xhr.onreadystatechange = function () {
 		if(xhr.readyState==4){
@@ -185,12 +185,6 @@ function get_code() {
 			}
 		}
 	}
-	xmlhttp.onreadystatechange=function()
-	{
-		if (xmlhttp.readyState==4 && xmlhttp.status==200)
-		{
-			document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-		}
-	}
+
 
 }

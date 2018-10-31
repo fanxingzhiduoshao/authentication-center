@@ -31,7 +31,7 @@ public class RegisterController {
 
     @GetMapping("/index")
     public ModelAndView index() {
-        ModelAndView mv = new ModelAndView("/register/index");
+        ModelAndView mv = new ModelAndView("register/index");
 
         return mv;
     }
