@@ -181,7 +181,7 @@ function get_code() {
 	xhr.onreadystatechange = function () {
 		if(xhr.readyState==4){
 			if(xhr.status==200){
-				console.log('111');
+
 			}
 		}
 	}

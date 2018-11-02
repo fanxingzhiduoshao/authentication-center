@@ -1,0 +1,213 @@
+@charset "utf-8";
+* { margin: 0; padding: 0;}
+body { font-size: 14px; font-family: "Microsoft Yahei";}
+ul, li { list-style: none;}
+
+#header { height: 50px;}
+#footer { width: 100%; height: 150px;}
+.clr { clear: both;}
+/*******************/
+/**********头部样式************************/
+#header .ul {
+	position: absolute;
+	right: 10px;
+	top: 24px;
+	padding-right: 96px;
+}
+
+#header .ul a {
+	float: left;
+}
+#header .ul a {
+	padding: 5px 10px;
+	text-decoration: none;
+	color: #333;
+	font-weight: 600;
+}
+#header .ul a:not(.more_brands):hover { color: #00c;}
+#header .ul .more_brands {
+	background: #3385ff;
+	color: #fff;
+	margin-left: 16px;
+	position: absolute;
+}
+
+/*********************************logo********/
+#content .content_logo {
+	/*border: 1px solid black;*/
+	text-align: center;
+}
+#content .content_logo { margin: 100px 0 20px 0;}
+#content .content_logo img { width: 270px;}
+#content .content_search {
+	margin: 0 auto;
+	width: 620px;
+}
+#content .srch_box {
+	width: 540px; height: 36px;
+	border: 1px solid #ccc;
+	border-right: 0;
+	position: relative;
+	display: inline-block;
+	/*用span可以textalign居中对齐*/
+	/*行内块margin元素才生效*/
+}
+#content .srch_box .camera {
+	background: url("../img/camera.png") no-repeat;
+	width: 18px; height: 16px;
+	position: absolute;
+	right: 10px; top: 10px;
+}
+#content .srch_box input {
+	width: 500px; height: 22px; line-height: 22px; font-size: 18px;
+	margin: 6px 0 0 7px;
+	position: relative;
+	border: 0;
+	outline: none;
+	background-color: transparent;
+}
+#content .srch_btn input {
+	background: #3385ff; color: #fff; font-size: 15px;
+	width: 100px; height: 38px; line-height: 36px;
+	position: absolute; /*否则元素间会有空隙？*/
+	border: 0;
+	outline: none;
+}
+#content .srch_btn input:hover {
+	background-color: #3e7ef3;
+	cursor: pointer;
+}
+#content .border_blue {
+	border-color: #3385ff;
+}
+/******************************************************/
+/*******************底部css****************************/
+#footer {
+	position: absolute;
+	bottom: 40px;
+}
+#footer .qrcode {
+	width: 60px; height: 60px;
+	background: url("../img/bd_qrcode.png") no-repeat;
+	margin: 0 auto;
+}
+#footer p {
+	text-align: center;
+	color: #999; font-size: 10px;
+	line-height: 24px;
+}
+#footer .qrcode+p {
+	color: #333;
+	font-weight: 700;
+	font-size: 14px;
+	margin-bottom: 16px;
+}
+#footer a{
+	color: #999;
+	margin: 0 12px;
+}
+#footer p span {
+	background: url("../img/icons_bd.png") no-repeat -599px -95px;
+	display: inline-block;
+	width: 16px; height: 20px;
+	vertical-align: bottom;
+}
+#footer p span:last-child {
+	background-position: -622px -96px ;
+}
+#footer .feedback { margin: 0;}
+/*************************************/
+/**************悬浮菜单****************/
+#header .brand_list {
+	position: absolute;
+	right: 0;
+	width: 100px; height: 100%;
+	background-color: #f9f9f9;
+	border: 1px solid #eee;
+	border-top: 0; border-bottom: 0;
+	display: none;
+	overflow: hidden;
+}
+#header .brand_list>div:not(.brand_title) a {
+	display: block;
+	margin: 0 10px;
+	padding: 8px 0 20px 0;
+	border-top: 1px solid #eee;
+}
+#header .brand_list p {
+	text-align: center;
+}
+#header .brand_list a {
+	text-decoration: none;
+	color: #666;
+	font-size: 10px;
+}
+#header .brand_list a:hover {text-decoration: underline;}
+#header .brand_title {
+	text-align: center;
+	padding: 28px 0 16px 0;
+}
+#header .brand_list .all_brands {
+	text-align: center;
+}
+#header .brand_list .brand_logo {
+	background: url("../img/nuomi_logo.png") no-repeat;
+	width: 36px; height: 36px;
+	background-size: cover;
+	margin: 4px auto;
+}
+#header .brand_list .qqjt div {
+	background: url("../img/qqjt_logo.png");
+	background-size: cover;
+}
+#header .brand_list .pics div {
+	background: url("../img/image_logo.png");
+	background-size: cover;
+}
+#header .brand_list .zhidao div {
+	background: url("../img/zhidao_logo.png");
+	background-size: cover;
+}
+#header .brand_list .wenku div {
+	background: url("../img/wenku_logo.png");
+	background-size: cover;
+}
+#header .brand_list .bangdan div {
+	background: url("../img/fengyunbang_logo.png");
+	background-size: cover;
+}
+/**************************************/
+/*****************pop菜单**************/
+#header .srch_set {
+	position: absolute;
+	border: 1px solid #ccc;
+	width: 90px;
+	right: 76px; top: 32px;
+	display: none;
+}
+#header .srch_set a {
+	width: 70px; height: 26px; line-height: 26px;
+	display: block;
+	color: #666; text-align: center; font-weight: normal; font-size: 10px;
+	padding: 0 10px;
+}
+#header .ul .srch_set a:hover {
+	color: #fff;
+	background-color: #3385ff;
+}
+#header .srch_set i, #header .srch_set b{
+	display: block;
+	position: absolute;
+	left: 40px;
+	border: 5px solid transparent;
+	border-bottom-color: #ccc;
+	border-style: dashed dashed solid;
+}
+#header .srch_set i {
+	top: -11px;
+}
+#header .srch_set b {
+	border-bottom: 5px solid #fff;
+	top: -10px;
+}
+
