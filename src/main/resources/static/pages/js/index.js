@@ -25,46 +25,139 @@ $('#header').mouseout(function() {
 // 提示文字 和 相关事件
 $('.hint_box').find('*').css('display','none');
 
-$('#username').blur(check_username).focus(
-  function(){
+$('#username').blur(check_username).focus(function(){
   $('#username').addClass('border_blue');
-    $('.username_line .reg_hint').css('display','none');
-    $('.username_line .long_hint').css('display','none');
-    $('.username_line .error_hint').css('display','none');
-    $('.username_line i').css('display','none');
-    $('.username_line .ipt_hint').css('display','inline-block');}
+  $('.username_line .reg_hint').css('display','none');
+  $('.username_line .long_hint').css('display','none');
+  $('.username_line .error_hint').css('display','none');
+  $('.username_line i').removeClass().css("display","none");
+  $('.username_line .ipt_hint').css('display','inline-block');}
   );
 
 // username验证函数
-var regUser = /(?![\d]*$)[\w\u4e00-\u9fa5]{1,14}/; //7位汉字或者14位英文
+var regUser = /(?![\d]*$)[\w\u4e00-\u9fa5]{1,14}/;//7位汉字或者14位英文
+var allNumber = /^\d+$/;
+
 function check_username(){
   var ipt = $('#username').val();//获取用户输入的用户名
   var ipt_len = 0;
-  if(ipt == ''){
-    $('#username').removeClass();
-    $('.username_line .ipt_hint').css('display','none');
-  }
-  else if(regUser.test(ipt)){
-    for(var i=0; i<ipt.length; i++){
-      if(ipt.charCodeAt(i)>=0 && ipt.charCodeAt(i)<=128){
-        ipt_len++;
-      }else { ipt_len+=2;}
+  // 检查用户名是否为空
+  function isEmpty(){
+    if(ipt == ''){
+      $('#username').removeClass();
+      $('.username_line .ipt_hint').css('display','none');
+      return false;
+    }else {
+      return true;
     }
+  }
+  //检查字节长度是否 符合要求
+  function check_length(){
+    for (var i = 0; i<ipt.length; i++) {
+      if (ipt.charCodeAt(i) >= 0 && ipt.charCodeAt(i) <= 128) {
+        ipt_len++;
+      } else {
+        ipt_len += 2;
+      }
+    }//计数字节数
     if(ipt_len<=14){
       $('#username').removeClass();
       $('.username_line .ipt_hint').css('display','none');
-      $('.username_line i').attr('class','green').css('display','inline-block');
+      // $('.username_line i').attr('class','green').css('display','inline-block');
+      return true;
     }else{
       $('.username_line .ipt_hint').css('display','none');
       $('.username_line .reg_hint').css('display','none');
       $('.username_line i').attr('class','red').css('display','inline-block');
       $('.username_line .long_hint').css('display','inline-block');
+      console.log('长度超出');
+      return false;
     }
-  }else {
-    $('#username').addClass('border_red');
-    $('.username_line .ipt_hint').css('display','none');
-    $('.username_line i').attr('class','red').css('display','inline-block');
-    $('.username_line .reg_hint').css('display','inline-block');
+  }
+  //检查是否全为数字
+  function isAllNumber(){
+    if(allNumber.test(ipt)){
+      $('#username').addClass('border_red');
+      $('.username_line .ipt_hint').css('display','none');
+      $('.username_line i').attr('class','red').css('display','inline-block');
+      $('.username_line .reg_hint').css('display','inline-block');
+      console.log("不能全是数字")
+      return false;
+    }else {
+      $('#username').addClass('border_blue');
+      $('.username_line .ipt_hint').css('display','none');
+      // $('.username_line i').attr('class','red').css('display','none');
+      // $('.username_line i').attr('class','green').css('display','inline-block');
+      $('.username_line .reg_hint').css('display','none');
+      return true;
+    }
+  }
+  //检查唯一性
+  function check_name_unique(){
+    $.get('../register/unique', "ipt:"+ipt, function(response){
+      // console.log(response);
+      return response.data;
+    });
+  }
+  //最终检查
+  if(isEmpty() &&check_length() && isAllNumber() ){
+    console.log("可用！");
+    $("#username").removeClass();
+    $('.username_line .hint_box i').css('display','inline-block')
+      .attr('class','green');
+    // $(".username_line .hint_box").css("display","inline-block");
+    $(".username_line .ipt_hint").css("display","none");
+    $(".username_line .reg_hint").css("display","none");
+    $(".username_line .long_hint").css("display","none");
+    return true;
+  }
+
+}
+///////////////////////////////////////
+//验证手机号
+$('#phone').blur(check_phone).focus(function(){
+  $('#phone').addClass('border_blue');
+  $('.phone_line .ipt_hint').css('display','inline-block');
+  $('.phone_line .error_hint').css('display','none');
+  $(".phone_line .hint_box i").css("display","none");
+});
+var phoneReg = /^[1][3578][\d]{9}$/;
+function check_phone(){
+  var ipt = $("#phone").val();
+  //检测是否输入号码
+  function isBlank(){
+    if(ipt==""){
+      $("#phone").removeClass();
+      $(".phone_line .ipt_hint").css("display","none");
+      console.log("手机号为空");
+      return false;
+    }else {
+      return true;
+    }
+  }
+  //检查号码 是否满足正则表达式
+  function isLegal(){
+    if(phoneReg.test(ipt)){
+      $(".phone_line .hint_box i").removeClass().addClass("green");
+      $(".phone_line .ipt_hint").css("display","none");
+      $(".phone_line .hint_box i").removeClass().addClass("green")
+        .css("display","inline-block");
+      return true;
+    }else{
+      $("#phone").removeClass().addClass("border_red");
+      $(".phone_line .error_hint").css("display","inline-block");
+      $(".phone_line .ipt_hint").css("display","none");
+      $(".phone_line .hint_box i").removeClass().addClass("red")
+        .css("display","inline-block");;
+      console.log("手机号格式错误");
+      return false;
+    }
+  }
+  if(isBlank() && isLegal()){
+    $(".phone_line .hint_box i").removeClass().addClass("green")
+      .css("display","inline-block");
+    $("#phone").removeClass();
+    return true;
   }
 }
 
@@ -134,19 +227,12 @@ function check_pwd(){
     $('.pwd_line .ipt_hint').css('display','none');
     $('.pwd_line .reg_hint').css('display','none');
     $('.pwd_line .verify_pass').addClass('green').css('display','block');
+    $("#pwd").removeClass();
+    return true;
   }
-  console.log(regNum.test(pwd));
 }
 
-///////////////////////////////////////
-//验证手机号
-$('#phone').blur(check_phone).focus(function(){
-  $('#phone').addClass('border_blue');
-  $('.phone_line .ipt_hint').css('display','inline-block');
-});
-function check_phone(){
 
-}
 
 ///////////////////
 /////////////验证码
@@ -156,35 +242,83 @@ $('.pop_close').click(function(){
 });
 if($('.pop_code_bg:hidden')){
 	$('#get_code').click(function(){
-		$('.pop_code_bg').css('display','block');
-		$('.pop_code_wrapper').css('display','block');
-		get_code();
+    $('.code_box').attr('src','../register/validate_code');//获取图片
+    $('.pop_code_bg').css('display','block');
+    $('.pop_code_wrapper').css('display','block');
 	});
 }
+$('.reload_code').mouseup(function(){
+  $.get('../register/validate_code',function(){
+    $('.code_box').attr('src','../register/validate_code');
+  })
+});
+
+//验证码提交验证
+$('#code_submit').mouseup(function(){
+  var ipt = $('#code_input').val();
+  $.post('../register/validate_code','code='+ipt,function(response){
+    console.log(response);
+    console.log("ipt:"+ipt);
+    // console.log(response.body);
+    if(ipt==''){
+      $('#code_input').addClass('border_red');
+      //红色框加不上去怎么回事？？？
+      console.log('验证码为空');
+      $('.pop_code_body .code_hint').css('display','inline-block');
+      $('.pop_code_body .code_error').css('display','none');
+      $('.pop_code_body .no_code').css('display','inline-block');
+    }else if(response.data=='false'){
+      console.log('验证码错误');
+      $('.pop_code_body #code_input').removeClass().addClass('border_red');
+      $('.pop_code_body .code_hint').css('display','inline-block');
+      $('.pop_code_body .no_code').css('display','none');
+      $('.pop_code_body .code_error').css('display','inline-block');
+    }else {
+      $('.pop_code_body .code_hint').css('display','none');
+      $(".pop_code_wrapper").css("display","none");
+      $(".pop_code_bg").css("display","none");
+      $("#verify_code").val(ipt);
+      console.log("验证成功");
+    }
+  });
+});
+
+//表单提交验证
+// function check_form(){
+//   if(check_username() && check_phone() && check_pwd() && $("#check_proto:checked").length>0){
+//     return true;
+//   }else {
+//     return false;
+//   }
+//   console.log(check_username())
+//   console.log(check_pwd())
+//   console.log(check_phone())
+// }
+$("#submit").mouseup(function(){
+  $.ajax({
+    type: "post",
+    url: "http://localhost:8080/register",
+    contentType: "application/json; charset=UTF-8",
+    dataType: "json",
+    data: {
+      'accountName' : $("#username").val(),
+      'phoneNumber' : $("#phone").val(),
+      'password' : $("#pwd").val()
+    },
+    success: function(data){
+      console.log("注册成功");
+      console.log(data);
+    },
+    error: function(errorThrown){
+     console.log(errorThrown)
+    }
+
+  });
+});
+// 跳转到登录界面
+$(".log_link button").click(
+
+);
 
 
-function getXhr() {
-	var xhr;
-	if (window.XMLHttpRequest) {
-		xhr = new XMLHttpRequest();
-	} else {
-		xhr = new ActiveXObject('Microsoft.XMLHttp')
-	}
-	return xhr;
-}
 
-
-function get_code() {
-	var xhr = getXhr();
-	xhr.open('get', '../register/validate_code');
-	xhr.send();
-	xhr.onreadystatechange = function () {
-		if(xhr.readyState==4){
-			if(xhr.status==200){
-
-			}
-		}
-	}
-
-
-}

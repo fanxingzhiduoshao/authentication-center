@@ -154,13 +154,12 @@ form>p, form .pwd_line {
 /****************提示文字和事件****************/
 .username_line .hint_box {
 	position: relative;
-	/*width: 250px; height: 40px;*/
 	/*top: 10px;*/
 }
 .username_line .ipt_hint, .error_hint, .long_hint, .reg_hint {
 	display: inline-block;
 	position: absolute;
-	width: 250px;
+	width: 220px; height: 40px;
 	margin-top: 4px;
 }
 .long_hint {
@@ -169,6 +168,7 @@ form>p, form .pwd_line {
 .reg_info .hint_box i{
 	width: 15px; height: 15px;
 	margin-right: 10px;
+	position: relative;
 }
 .red{ background: url("../img/err_small.png") no-repeat;}
 .green{ background: url("../img/reg_icons.png") no-repeat -80px 0;}
@@ -177,6 +177,21 @@ form>p, form .pwd_line {
 .hint_box span { font-size: 10px;}
 .error_hint, .long_hint, .reg_hint { color: #fc4343;}
 
+/*******************************/
+/************手机号码************/
+.phone_line .hint_box {
+	position: relative;
+}
+.phone_line .error_hint, .phone_line .ipt_hint {
+	position: absolute;
+	margin: 0;
+	width: 220px; height: 40px;
+	line-height: 40px;
+}
+.phone_line .hint_box i {
+	position: relative;
+	top: 2px;
+}
 /********密码验证********/
 /*.pwd_line { position: relative;}*/
 .pwd_line .hint_box {
@@ -254,11 +269,7 @@ form>p, form .pwd_line {
 	margin-top: 12px;
 	margin-left: 2px;
 }
-/**************************/
-/****************验证手机号*/
-.phone_line .hint_box {
-	display: inline-block;
-}
+
 /*********************************************/
 /*********************验证码*******************/
 .pop_code_wrapper {
@@ -311,16 +322,16 @@ form>p, form .pwd_line {
 	width: 150px; height: 16px;
 	padding: 11px 10px;
 	outline: 0;
-	border: 1px solid #ccc;
+	/*border: 1px solid #ccc;*/
 }
 .pop_code_body .code_box {
 	display:block;
 	float: left;
 	margin-right: 10px;
 	width: 100px; height: 38px;
-	border: 1px solid #ccc; background: #fcfcfc;
-	text-align: center;
-	font-size: 16px;
+	/*border: 1px solid #ccc; background: #fcfcfc;*/
+	/*text-align: center;*/
+	/*font-size: 16px;*/
 }
 .pop_code_body .code_hint{
 	display: none;
