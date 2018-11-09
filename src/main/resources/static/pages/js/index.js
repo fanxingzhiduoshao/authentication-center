@@ -294,23 +294,26 @@ $('#code_submit').mouseup(function(){
 //   console.log(check_pwd())
 //   console.log(check_phone())
 // }
+var obj = {
+    "accountName" : $("#username").val(),
+    "mail": "",
+    "phoneNumber" : $("#phone").val(),
+    "password" : $("#pwd").val()
+    };
+
 $("#submit").mouseup(function(){
   $.ajax({
     type: "post",
     url: "http://localhost:8080/register",
-    contentType: "application/json; charset=UTF-8",
+    contentType: "application/json",
     dataType: "json",
-    data: {
-      'accountName' : $("#username").val(),
-      'phoneNumber' : $("#phone").val(),
-      'password' : $("#pwd").val()
-    },
+    data: JSON.stringify(obj),
     success: function(data){
       console.log("注册成功");
       console.log(data);
     },
     error: function(errorThrown){
-     console.log(errorThrown)
+     console.log(errorThrown);
     }
 
   });
