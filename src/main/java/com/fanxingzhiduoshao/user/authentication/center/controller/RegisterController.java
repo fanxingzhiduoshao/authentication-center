@@ -40,6 +40,7 @@ public class RegisterController {
     @ResponseBody
     @ApiOperation("注册用户")
     public AjaxResult addUser(@RequestBody UserAddVO userAddVO) {
+        System.out.println("注册信息："+userAddVO.toString());
         userService.addUser(userAddVO);
         return AjaxResult.SUCCESSS;
     }
