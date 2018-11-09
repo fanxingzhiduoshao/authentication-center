@@ -302,11 +302,13 @@ var obj = {
     };
 
 $("#submit").mouseup(function(){
+  console.info(JSON.stringify(obj)) ;
   $.ajax({
     type: "post",
-    url: "http://localhost:8080/register",
+    // url: "http://localhost:8080/register",
+    url: "../register",
     contentType: "application/json",
-    dataType: "json",
+    // dataType: "json",
     data: JSON.stringify(obj),
     success: function(data){
       console.log("注册成功");
