@@ -19,6 +19,11 @@ public class AjaxResult implements Serializable {
         return new AjaxResult(code.getCode(),code.getMsg());
     }
 
+    public static AjaxResult instanceSuccess(Object data){
+        return instance(Code.SUCCESS).setData(data);
+    }
+
+
     @NonNull
     private int code;
     @NonNull
